@@ -15,8 +15,6 @@ class MainMenu extends Component {
 
         const {logged } = this.props
         console.log( "fucking logged?",logged)
-        //const storedToken = localStorage.getItem('token')
-
         return (
                <div>
                   <ul>
@@ -31,24 +29,6 @@ class MainMenu extends Component {
     }
 }
 
-// const MainMenu = props => (function(props){
-//     render() {
-//         const {store} = props
-//         return (
-
-//                         <div>
-//                            <ul>
-//                              <li><Link to="/">Home</Link></li>
-//                              <li><Link to="/signup">New Account</Link></li>
-//                              <li><Link to="/login">Log in</Link></li>
-//                            </ul>
-//                      </div>
-
-
-//             )
-//     }
-
-// })
 const formed = reduxForm({
     form: 'menu',
 })(MainMenu)

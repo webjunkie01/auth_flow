@@ -6,7 +6,6 @@ const PrivateRoute = ({ component: Component, ...rest, store: store } ) => (
 
   <Route {...rest} render={function (props) {
       const client = store.getState().client
-      //const storedToken = localStorage.getItem('token')
       if (client && client.token) {
           return <Component {...props}/>
       }
@@ -21,11 +20,5 @@ const PrivateRoute = ({ component: Component, ...rest, store: store } ) => (
       }
     }/>
 )
-
-// PrivateRoute.propTypes = {
-//   store: PropTypes.function,
-//   path: PropTypes.string,
-//   component: PropTypes.object
-// }
 
 export default PrivateRoute

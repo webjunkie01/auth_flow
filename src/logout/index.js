@@ -15,30 +15,13 @@ class LogOut extends Component {
          logout: PropTypes.object,
      }
 
-    // constructor(props, context) {
-    //     super(props, context);
-    //     const store = this.context.store
-    //     console.log("dis the store props", props.dispatch)
-    //     console.log("context", this.context)
-    // }
     componentWillMount() {
-        //console.log(this.state.logout)
-        //console.log(this.context.store)
-        //store.dispatch(setLogOut())
-        //store.dispatch(unsetClient())
         this.props.dispatch(logoutRequest())
         this.props.dispatch(menusetLogout())
         this.props.dispatch(loginOut())
-        // const {logout } = this.props.logout
-        // console.log( "fucking logout?",this.props)
-        // console.log(logout)
-        // return (
-        //     <div>
-        //     {logout && <Redirect to='/' push />}
-        //     </div>)
+
     }
     render() {
-        //this.props.dispatch(logoutRequest())
         const {logout } = this.props.logout
         console.log( "fucking logout?",this.props.logout)
         console.log(logout)
@@ -66,4 +49,3 @@ export default connected
 
 
 
-//export default LogOut
