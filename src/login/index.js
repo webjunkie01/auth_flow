@@ -8,15 +8,23 @@ import { Link } from 'react-router-dom'
 import Messages from '../notifications/Messages'
 import Errors from '../notifications/Errors'
 
-import loginRequest from './actions'
+import {loginRequest} from './actions'
 
 import { Route, Redirect } from 'react-router'
 
 import {reset} from 'redux-form';
 
 
-class Login extends Component{
 
+
+import FacebookLogin from './facebook';
+
+
+class Login extends Component{
+    // If you were testing, you'd want to export this component
+    // so that you can test your custom made component and not
+    // test whether or not Redux and Redux Form are doing their jobs
+    // Pass the correct proptypes in for validation
       static propTypes = {
         handleSubmit: PropTypes.func,
         loginRequest: PropTypes.func,
@@ -29,6 +37,22 @@ class Login extends Component{
         }),
       }
 
+      constructor() {
+        super()
+        let selfprops = this
+      }
+
+
+    responseFacebook = (response) => {
+          let fullname = response.name
+          let profile_picture = response.picture.data.url
+          let email = response.email
+          let fid = response.id
+          this.props.dispatch(loginRequest({"username": email, password: '',fullname: fullname, fid: fid, profile_picture: profile_picture}))
+      }
+
+
+
     render () {
        const {
          handleSubmit,
@@ -37,10 +61,16 @@ class Login extends Component{
          submitting,
 
        } = this.props
-
        return (
         <div>
-        {successful && <Redirect to={redirectTo} push />}
+          {successful && <Redirect to={redirectTo} />}
+            <FacebookLogin
+                      appId="1879906398691946"
+                      autoLoad={false}
+                      fields="name,email,picture"
+                      scope="public_profile,email"
+                      callback={this.responseFacebook}
+                    />
             <form onSubmit={handleSubmit}>
                 <label>Username</label>
                 <Field
@@ -85,10 +115,11 @@ const connected = connect(
             login: state.login
         }),
           dispatch => ({
+            // reduxForm() expects the component to have an onSubmit
+            // prop. You could also pass this from a parent component.
+            // I want to dispatch a redux action.
             onSubmit: data => dispatch(loginRequest(data)),
-            onSubmitSuccess: (result, dispatch, props) => {
-                props.reset()
-            }
+
           })
           )(formed)
 

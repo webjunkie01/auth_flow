@@ -8,9 +8,12 @@ import Login from './login/';
 import Signup from './signup/'
 import Dashboard from './dashboard/'
 
+
 import
   PrivateRoute
- from './lib/check-auth'
+ from './lib/PrivateRoute'
+
+import LogOut from './logout'
 
 const MainContent = props =>
 
@@ -19,6 +22,9 @@ const MainContent = props =>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <PrivateRoute store={props.store} path={"/dashboard"} component={Dashboard} />
+
+            <Route store={props.store} path={"/logout"} component={LogOut}/>
+
         </div>
 )
 

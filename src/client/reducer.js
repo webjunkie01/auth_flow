@@ -12,7 +12,7 @@ const reducer = function clientReducer(state = initialState, action ) {
                 id: action.token.userId,
                 token: action.token,
             }
-        case 'CLIENT_UNSET':
+        case CLIENT_UNSET:
             return {
                 id: null,
                 token: null,

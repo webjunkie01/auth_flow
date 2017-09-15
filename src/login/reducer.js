@@ -1,7 +1,9 @@
 import {
     LOGIN_REQUESTING,
     LOGIN_SUCCESS,
-    LOGIN_ERROR
+    LOGIN_ERROR,
+    LOGIN_OUT,
+    LOGIN_SOCIAL,
 } from './constants'
 
 const initialState = {
@@ -19,11 +21,10 @@ const reducer = function loginReducer(state = initialState, action) {
           return {
             requesting: true,
             successful: false,
-            messages: [{ body: 'Logging in...', time: new Date() }],
+            messages: [{ body: 'Logging in', time: new Date() }],
             errors: [],
             redirectTo: '',
           }
-
         // Successful?  Reset the login state.
         case LOGIN_SUCCESS:
           return {
@@ -42,6 +43,14 @@ const reducer = function loginReducer(state = initialState, action) {
               body: action.error.toString(),
               time: new Date(),
             }]),
+            messages: [],
+            requesting: false,
+            successful: false,
+            redirectTo: '',
+          }
+        case LOGIN_OUT:
+          return {
+            errors: [],
             messages: [],
             requesting: false,
             successful: false,
