@@ -12,14 +12,13 @@ class MainMenu extends Component {
      }
 
       render() {
-
         const {logged } = this.props
-        console.log( "fucking logged?",logged)
         return (
                <div>
                   <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/signup">New Account</Link></li>
+                    {!logged && <li><Link to="/">Home</Link></li>}
+                    {logged && <li><Link to="/dashboard">Dashboard</Link></li>}
+                    {!logged && <li><Link to="/signup">New Account</Link></li>}
                     {logged && <li><Link to="/logout">Log out</Link></li>}
                     {!logged && <li><Link to="/login">Log in</Link></li>}
                   </ul>

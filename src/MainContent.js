@@ -22,7 +22,6 @@ const MainContent = props =>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <PrivateRoute store={props.store} path={"/dashboard"} component={Dashboard} />
-
             <Route store={props.store} path={"/logout"} component={LogOut}/>
 
         </div>

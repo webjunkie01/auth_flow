@@ -6,9 +6,10 @@ import {
   LOGIN_REQUESTING,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
+  LOGIN_OUT
 } from './constants'
 
-import {MENU_LOGGED,MENU_LOGOUT} from '../menu/constants'
+
 
 import {CLIENT_LOGOUT} from '../logout/constants'
 
@@ -21,7 +22,7 @@ import {
   CLIENT_UNSET,
 } from '../client/constants'
 
-import {setLogged} from '../menu/actions'
+
 
 
 
@@ -78,16 +79,12 @@ function loginSocialApi(fullname, username, fid, profile_picture) {
 
 function* logout () {
     yield put(unsetClient())
-    //yield put({ type: CLIENT_LOGOUT })
-    yield put({ type: MENU_LOGOUT })
-    //yield put({ type: CLIENT_UNSET })
     localStorage.removeItem('token')
 }
 
 function* loginFlow (username, password, fullname,  fid, profile_picture) {
     let token
     try {
-        console.log("Fullname", fullname)
         if (typeof fullname !== "undefined") {
             token = yield call(loginSocialApi, fullname, username, fid, profile_picture)
         }else{
@@ -95,7 +92,6 @@ function* loginFlow (username, password, fullname,  fid, profile_picture) {
         }
         yield put(setClient(token))
         yield put({type: LOGIN_SUCCESS})
-        yield put({type: MENU_LOGGED})
         localStorage.setItem('token', JSON.stringify(token))
 
 
@@ -113,11 +109,10 @@ function* loginFlow (username, password, fullname,  fid, profile_picture) {
 function* loginSocial(fullname, username, fid, profile_picture) {
     let token
     try {
-        console.log("preparing send request social api")
+
         token = yield call(loginSocialApi, fullname, username, fid, profile_picture)
         yield put(setClient(token))
         yield put({type: LOGIN_SUCCESS})
-        yield put({type: MENU_LOGGED})
         localStorage.setItem('token', JSON.stringify(token))
     } catch (error) {
         // error? send it to redux
@@ -131,9 +126,9 @@ function* loginWatcher () {
 
         const { username, password, fullname, fid, profile_picture } = yield take(LOGIN_REQUESTING)
         const task = yield fork(loginFlow, username, password, fullname,  fid, profile_picture)
-        const action = yield take([MENU_LOGOUT, LOGIN_ERROR])
+        const action = yield take([LOGIN_OUT, LOGIN_ERROR])
 
-        if (action.type === MENU_LOGOUT) {
+        if (action.type === LOGIN_OUT) {
             yield cancel(task)
 
         }

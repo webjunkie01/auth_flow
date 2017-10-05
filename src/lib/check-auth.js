@@ -18,7 +18,6 @@ function checkAuthorization (dispatch) {
 
     if (created > expiry) return false
     dispatch(setClient(token))
-    dispatch(setLogged())
     return true
   }
 

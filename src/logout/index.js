@@ -17,14 +17,11 @@ class LogOut extends Component {
 
     componentWillMount() {
         this.props.dispatch(logoutRequest())
-        this.props.dispatch(menusetLogout())
         this.props.dispatch(loginOut())
 
     }
     render() {
         const {logout } = this.props.logout
-        console.log( "fucking logout?",this.props.logout)
-        console.log(logout)
         return (
             <div>
             {logout && <Redirect to='/' push />}
