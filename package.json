@@ -21,7 +21,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
     "redux-saga": "^0.15.6",
-    "tar": "^2.2.2",
+    "tar": "^4.4.15",
     "websocket-extensions": "^0.1.4",
     "yargs-parser": "^13.1.2"
   },
