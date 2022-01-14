@@ -11,7 +11,7 @@
     "lodash.template": "^4.5.0",
     "mem": "^4.0.0",
     "node-fetch": "^2.6.1",
-    "node-forge": "^0.10.0",
+    "node-forge": "^1.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
