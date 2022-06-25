@@ -10,7 +10,7 @@
     "lodash-es": "^4.17.14",
     "lodash.template": "^4.5.0",
     "mem": "^4.0.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "node-forge": "^0.10.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
